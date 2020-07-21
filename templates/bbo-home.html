@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brescia BibliOpen</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
+
+    <div class="jumbotron jumbotron-fluid text-white bg-danger">
+        <div class="container">
+            <h1 class="display-4">Brescia BibliOpen</h1>
+            <p class="lead">Il primo sito che ti mostra quali Biblioteche di Brescia sono aperte ora, in una sola pagina
+            </p>
+        </div>
+    </div>
+
+ <div style="text-align: center">SITO IN MANUTENZIONE, gli orari potrebbero non essere corretti</div>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm">
+                <h2>Aperte Oggi</h2>
+                <table class="table" id="biblioaperte">
+                    {% for item in listaAperte %}
+                    <tr><td><a href="{{item.url}}">  {{item.nome}}</a></td><td>{{item.orario}}</td></tr>
+
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="col-sm">
+                <h2>Chiuse Oggi</h2>
+                <table class="table" id="chiuse">
+
+                    {% for item in listaChiuse %}
+                    <tr><td>{{item.nome}}</td></tr>
+
+                    {% endfor %}
+                </table>
+
+            </div>
+
+        </div>
+
+
+
+        Nota: La biblioteca di Casazza ha eliminato l'orario dal suo sito
+
+        <hr>
+        <!-- Footer -->
+        <footer class="page-footer font-small pt-4">
+
+            <!-- Footer Links -->
+            <div class="container-fluid text-center text-md-left">
+
+                <!-- Grid row -->
+                <div class="row">
+
+                    <!-- Grid column -->
+                    <div class="col-md-6 mt-md-0 mt-3">
+
+                        <!-- Content -->
+
+                        <p>Gli orari si aggiornano ogni giorno in automatico</p>
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <hr class="clearfix w-100 d-md-none pb-3">
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 mb-md-0 mb-3">
+
+                        <!-- Links -->
+
+
+                        <a href="mailto:danielemariotto@gmail.com">Contattami</a>
+
+
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 mb-md-0 mb-3">
+
+                        <!-- Links -->
+
+
+
+
+                    </div>
+                    <!-- Grid column -->
+
+                </div>
+                <!-- Grid row -->
+
+            </div>
+            <!-- Footer Links -->
+
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">© 2020 Copyright
+                Daniele Mariotto
+            </div>
+            <!-- Copyright -->
+
+        </footer>
+        <!-- Footer -->
+
+        <script>
+
+            function loadaperte() {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "open.json", true);
+
+                xhr.onload = function () {
+                    if (this.status = 200) {
+
+                        aperte = JSON.parse(this.responseText);
+
+                        if (aperte.biblio == null) {//gestisco caso in cui siano chiuse tutte regolarmente
+                            table = "Non ci sono biblioteche aperte oggi"
+                        }
+                        else {
+                            var len = aperte.biblio.length;
+
+                            var table = '';
+
+                            //inizio: creo tabella con ogni elemento della lista delle biblio aperte
+                            table += '<table>';
+
+
+                            for (i = 0; i < len; i++) {
+
+
+
+
+
+                                table += '<tr>';
+
+
+                                table += '<td ><a href='+aperte.biblio[i].url+'>' + aperte.biblio[i].nome + '</a></td>';
+                                table += '<td class="elenchi">' + aperte.biblio[i].orario + '</td>';
+
+                                table += '</tr>'
+
+
+                            }
+                            table += '</table>';
+                            document.getElementById('biblioaperte').innerHTML = table;
+                            //fine
+
+
+                        }
+                    }
+
+
+
+
+                    
+
+                }
+                xhr.send();
+            }
+
+            function loadchiuse() {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "chiuse.json", true);
+
+                xhr.onload = function () {
+                    if (this.status = 200) {
+
+                        file = JSON.parse(this.responseText);
+                       /*  chiuse = file.slice(2, file.length - 2)// elimina parti in eccesso (apice e parentesi quadre) nella lista
+                        chiuse = chiuse.split("', '") //separa la stringa delle biblioteche chiuse e toglie parti inutili */
+
+                        var len = file.chiuse.length;
+                        console.log(len)
+                        var table = '';
+
+                        //inizio: creo tabella con ogni elemento della lista delle biblio aperte
+
+                        table += '<table>';
+
+
+                        for (i = 0; i < len; i++) {
+                            table += '<tr>';
+
+
+                            table += '<td> <a href='+file.chiuse[i].url+'>' + file.chiuse[i].nome + '</a></td>';
+                            table += '<td>' + "Chiusa" + '</td>';
+
+                            table += '</tr>'
+                        }
+                        table += '</table>';
+                        document.getElementById('chiuse').innerHTML = table;
+                        //fine
+
+
+                    }
+                }
+
+
+
+
+                xhr.send();
+            }
+
+
+            loadaperte();
+            loadchiuse();
+
+
+        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
