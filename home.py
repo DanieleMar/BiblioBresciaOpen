@@ -21,7 +21,7 @@ readjsonfile= open("open.json", "r") #apri file json
 listajson=json.load(readjsonfile) #carica in variabile json
 listaChiuseJson=json.load(open("chiuse.json", "r"))
 
-@app.route("/bbo")
+@app.route("/")
 
 def load_page():
     return render_template('bbo-home.html', listaAperte=listajson["biblio"], listaChiuse=listaChiuseJson["chiuse"]) 
