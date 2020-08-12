@@ -8,6 +8,7 @@ pipenv shell
 
 COSA FA:
 -pesca orario con bs4
+-aggiungo file scraping provincia qui da altro progetto
 -pesca orario sia mattina che pomeriggio
 -mostra orario in pagina con flask
 -deploy su heroku
