@@ -1,0 +1,13 @@
+HEROKU
+heroku create
+
+FLASK
+python home.py
+
+pipenv shell
+
+COSA FA:
+-pesca orario con bs4
+-pesca orario sia mattina che pomeriggio
+-mostra orario in pagina con flask
+-deploy su heroku
