@@ -1,7 +1,8 @@
 .vscode
 __pycache__
 .vscode/settings.json
-comandi-chiave.txt
 .vscode/settings.json
 requirements-old.txt
 .vscode/settings.json
+open.json
+chiuse.json
