@@ -1,1 +1,1 @@
-web: gunicorn bresciabliopen:home
+web: gunicorn wsgi:app
