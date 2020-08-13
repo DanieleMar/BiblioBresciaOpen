@@ -30,7 +30,7 @@
                 <h2>Aperte Oggi</h2>
                 <table class="table" id="biblioaperte">
                     {% for item in listaAperte %}
-                    <tr><td><a href="{{item.url}}">  {{item.nome}}</a></td><td>{{item.orario}}</td></tr>
+                    <tr><td><a href="{{item.url}}">  {{item.nome}}</a></td><td>{{item.orario | replace ("['", "") | replace ("']", "") }}</td></tr>
 
                     {% endfor %}
                 </table>
