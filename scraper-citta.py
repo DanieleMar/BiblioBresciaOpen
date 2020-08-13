@@ -46,7 +46,10 @@ def getElement(url):
 
                 pomeriggio = sibling.next_sibling.next_sibling
 
+                # pomeriggio è l'orario del pomeriggio della biblioteca x
                 return sibling+' '+pomeriggio.strip()
+
+
 
     except AttributeError as e:
         return None
