@@ -6,9 +6,14 @@ python home.py
 
 pipenv shell
 
-COSA FA:
--pesca orario con bs4
--aggiungo file scraping provincia qui da altro progetto
+FEATURES E FUNZIONALITA':
 -pesca orario sia mattina che pomeriggio
+-pesca orario con bs4
 -mostra orario in pagina con flask
+
+TO DO:
+-aggiungo file scraping provincia qui da altro progetto
+-amplio a provincia brescia
 -deploy su heroku
+
+DONE:
