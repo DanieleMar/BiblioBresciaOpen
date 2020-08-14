@@ -50,3 +50,14 @@ scheduler.start()
 
 # Shut down the scheduler when exiting the app
 atexit.register(lambda: scheduler.shutdown()) """
+
+#imposto cronjob - aggiorna ogni giorno file json
+from datetime import datetime
+
+def cronjob():
+    """
+    Main cron job.
+    The main cronjob to be run continuously.
+    """
+    print("Cron job is running")
+    print("Tick! The time is: %s" % datetime.now())
