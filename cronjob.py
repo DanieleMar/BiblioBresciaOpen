@@ -2,10 +2,10 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 # Main cronjob function.
-from home import cronjob
+import scrapercitta
 
 # Create an instance of scheduler and add function.
 scheduler = BlockingScheduler()
-scheduler.add_job(cronjob, "interval", seconds=30)
+scheduler.add_job(scrapercitta, "interval", seconds=30)
 
 scheduler.start()

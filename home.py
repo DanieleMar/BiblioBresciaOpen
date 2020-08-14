@@ -38,26 +38,3 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 
-#funzione per ricorrenza
-""" 
-def print_date_time():
-    print(time.strftime("%A, %d. %B %Y %I:%M:%S %p"))
-
-
-scheduler = BackgroundScheduler()
-scheduler.add_job(func=print_date_time, trigger="interval", seconds=3)
-scheduler.start()
-
-# Shut down the scheduler when exiting the app
-atexit.register(lambda: scheduler.shutdown()) """
-
-#imposto cronjob - aggiorna ogni giorno file json
-from datetime import datetime
-
-def cronjob():
-    """
-    Main cron job.
-    The main cronjob to be run continuously.
-    """
-    print("Cron job is running")
-    print("Tick! The time is: %s" % datetime.now())
