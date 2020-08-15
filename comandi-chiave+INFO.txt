@@ -5,6 +5,7 @@ FLASK
 python home.py
 
 pipenv shell
+pipenv install
 
 FEATURES E FUNZIONALITA':
 -pesca orario sia mattina che pomeriggio
