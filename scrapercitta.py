@@ -86,17 +86,17 @@ biblio_chiuse_json = json.dumps(biblio_chiuse_dict)  # trasformo dict in json
 runninglog = "\n" + str(datetime.now())  # log di esecuzione
 
 
-f1 = open("/runninglog.txt", "a")
+f1 = open("runninglog.txt", "a")
 f1.write(runninglog)
 f1.close
 
 # creo json aperte
-f2 = open("/open.json", "w")
+f2 = open("open.json", "w")
 f2.write(biblio_aperte_json)
 f2.close
 
 
 # creo json chiuse
-f4 = open("/chiuse.json", "w")
+f4 = open("chiuse.json", "w")
 f4.write(str(biblio_chiuse_json))
 f4.close
