@@ -160,3 +160,6 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+chiuse.json
+open.json
+runninglog.txt
