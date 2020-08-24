@@ -24,15 +24,11 @@ listaChiuseJson=json.load(open("chiuse.json", "r"))
 @app.route("/")
 
 def load_page():
-    return render_template('bbo-home.html', listaAperte=listajson["biblio"], listaChiuse=listaChiuseJson["chiuse"]) 
+    try:
+      return render_template('bbo-home.html', listaAperte=listajson["biblio"], listaChiuse=listaChiuseJson["chiuse"]) 
+    except Exception as err:
+      print(err)
 
-
-# TEST PER IMPARARE I FLASK TEMPLATES #
-lista1=["abaco", "lemure", "ciuberter"]
-@app.route("/test")
-def load_pg():
-    name= "gianni"
-    return render_template("test.html", nome=name, navigation=lista1) 
 
 if __name__ == '__main__':
     app.run(debug=True)
