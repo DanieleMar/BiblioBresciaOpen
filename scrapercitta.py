@@ -32,7 +32,7 @@ def getElement(url):
     try:
         html = urlopen(url)
     except HTTPError as e:
-        return None  # eccezione per url vuoto
+        return e  # eccezione per url vuoto
     try:
         bs = BeautifulSoup(html.read(), 'html.parser')
         elem = bs.title  # ottengo elemento che mi serve
@@ -46,13 +46,10 @@ def getElement(url):
 
                 pomeriggio = sibling.next_sibling.next_sibling
 
-                # pomeriggio è l'orario del pomeriggio della biblioteca x
                 return sibling+' '+pomeriggio.strip()
 
-
-
     except AttributeError as e:
-        return None
+        return e
     return elem
 
 
