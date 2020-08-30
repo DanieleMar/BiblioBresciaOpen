@@ -16,21 +16,29 @@ def create_app():
   return app
 
 
-readjsonfile= open("open.json", "r") #apri file json
 
-listajson=json.load(readjsonfile) #carica in variabile json
-listaChiuseJson=json.load(open("chiuse.json", "r"))
+
+openjson=json.load(open("open.json", "r")) 
+chiusejson=json.load(open("chiuse.json", "r"))
 
 @app.route("/")
 
 def load_page():
-    try:
-      return render_template('bbo-home.html', listaAperte=listajson["biblio"], listaChiuse=listaChiuseJson["chiuse"]) 
-    except Exception as err:
-      print(err)
+  try:
+      return render_template('bbo-home.html', listaAperte=openjson["biblio"], listaChiuse=chiusejson["chiuse"]) 
+  except KeyError as e:
+    print("errore è: "+ str(e))
+    if str(e)=="'biblio'":
+      return render_template('bbo-home.html', listaAperte="", listaChiuse=chiusejson["chiuse"])
+    return (str(e))
+    
+      
+
+  
+
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+  app.run(debug=True)
 
 
