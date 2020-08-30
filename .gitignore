@@ -1,14 +1,12 @@
 .vscode
 __pycache__
-.vscode/settings.json
-.vscode/settings.json
 requirements-old.txt
-.vscode/settings.json
 open.json
 chiuse.json
 comandi-chiave-e-info
 
-#settings
+
+#ignora queste cartelle dis ettings
 __pycache__/
 .vscode/
 
