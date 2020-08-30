@@ -49,7 +49,7 @@ def getElement(url):
                 return sibling+' '+pomeriggio.strip()
 
     except AttributeError as e:
-        return e
+        return e 
     return elem
 
 
@@ -61,22 +61,26 @@ biblio_chiuse_dict = {}
 for i in Diz_Biblioteche:
 
     orario = getElement(Diz_Biblioteche[i])
-    if "chiusa" in orario:
-        biblio_chiuse_dict.setdefault('chiuse', [])
-        # ottengo url della biblioteca e non della sua tabella orario. pop elimina spazio bianco da lista
-        biblio_chiuse_dict['chiuse'].append(
-            {'nome': i, 'url': Diz_Biblioteche[i].split("/timetable/").pop(0)})
+    try:
+        if "chiusa" in orario:
+            biblio_chiuse_dict.setdefault('chiuse', [])
+            # ottengo url della biblioteca e non della sua tabella orario. pop elimina spazio bianco da lista
+            biblio_chiuse_dict['chiuse'].append(
+                {'nome': i, 'url': Diz_Biblioteche[i].split("/timetable/").pop(0)})
+    
+        
+    
+        else:
 
-    else:
+            #  #creo un dizionario che salva solo le biblioteche aperte oggi
+            biblio_aperte_dict.setdefault('biblio', [])
+            biblio_aperte_dict['biblio'].append({'nome': i, 'orario': orario.strip().split(
+                "\n"), "url": Diz_Biblioteche[i].split("/timetable/").pop(0)})
 
-        #  #creo un dizionario che salva solo le biblioteche aperte oggi
-        biblio_aperte_dict.setdefault('biblio', [])
-        biblio_aperte_dict['biblio'].append({'nome': i, 'orario': orario.strip().split(
-            "\n"), "url": Diz_Biblioteche[i].split("/timetable/").pop(0)})
-
-        # implemento: URL IN nome biblioteca
-        # elimino /timetable da Diz_Biblioteche[i]
-
+            # implemento: URL IN nome biblioteca
+            # elimino /timetable da Diz_Biblioteche[i]
+    except TypeError as e:
+        print (e)
 
 biblio_aperte_json = json.dumps(biblio_aperte_dict)  # trasformo dict in json
 biblio_chiuse_json = json.dumps(biblio_chiuse_dict)  # trasformo dict in json
