@@ -29,10 +29,15 @@
             <div class="col-sm">
                 <h2>Aperte Oggi</h2>
                 <table class="table" id="biblioaperte">
+
+                    
+                    
+                
                     {% for item in listaAperte %}
                     <tr><td><a href="{{item.url}}">  {{item.nome}}</a></td><td>{{item.orario | replace ("['", "") | replace ("']", "") }}</td></tr>
 
                     {% endfor %}
+                    
                 </table>
             </div>
             <div class="col-sm">
