@@ -27,6 +27,7 @@ Diz_Biblioteche = {
     'Villaggio Sereno': 'https://opac.provincia.brescia.it/library/sereno/timetable/'
 }
 
+biblio_senza_orario=[]
 
 def getElement(url):
     try:
@@ -38,16 +39,23 @@ def getElement(url):
         elem = bs.title  # ottengo elemento che mi serve
 
         # prelevo orario di oggi
-        for sibling in bs.find('div', id="timetable").td.next_sibling.next_sibling:
+        try:
+            for sibling in bs.find('div', id="timetable").td.next_sibling.next_sibling:
+                if ("Chiusa" in sibling):
+                    return "chiusa"
+                else:
 
-            if ("Chiusa" in sibling):
-                return "chiusa"
-            else:
+                    pomeriggio = sibling.next_sibling.next_sibling
 
-                pomeriggio = sibling.next_sibling.next_sibling
+                    return sibling+' '+pomeriggio.strip()
+        except AttributeError as e:
+                    
+                    if (str(e)== "'NoneType' object has no attribute 'td'"): ###AGGIUNGO IL LINK DI QUESTA BIBLIOTECA A UN FILE JSON
+                        biblio_senza_orario.append(url+"\n")
+                    return(str(e))
 
-                return sibling+' '+pomeriggio.strip()
 
+        
     except AttributeError as e:
         return e 
     return elem
@@ -98,6 +106,10 @@ f2.close
 
 
 # creo json chiuse
-f4 = open("chiuse.json", "w")
-f4.write(str(biblio_chiuse_json))
+f3 = open("chiuse.json", "w")
+f3.write(str(biblio_chiuse_json))
+f3.close
+
+f4 = open("biblio_orari_assenti.txt", "w")
+f4.write(str(biblio_senza_orario))
 f4.close
