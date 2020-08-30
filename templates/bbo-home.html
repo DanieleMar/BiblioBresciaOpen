@@ -45,8 +45,9 @@
                 <table class="table" id="chiuse">
 
                     {% for item in listaChiuse %}
-                    <tr><td>{{item.nome}}</td></tr>
-
+                   
+                    <tr><td><a href="{{item.url}}">  {{item.nome}}</a></td><td>{{item.orario | replace ("['", "") | replace ("']", "") }}
+                    </td>
                     {% endfor %}
                 </table>
 
