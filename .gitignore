@@ -8,6 +8,10 @@ open.json
 chiuse.json
 comandi-chiave-e-info
 
+#settings
+__pycache__/
+.vscode
+
 ###per vscode
   
 .vscode/*
