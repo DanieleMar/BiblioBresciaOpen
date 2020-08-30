@@ -76,7 +76,7 @@ for i in Diz_Biblioteche:
             biblio_aperte_dict.setdefault('biblio', [])
             biblio_aperte_dict['biblio'].append({'nome': i, 'orario': orario.strip().split(
                 "\n"), "url": Diz_Biblioteche[i].split("/timetable/").pop(0)})
-
+         
             # implemento: URL IN nome biblioteca
             # elimino /timetable da Diz_Biblioteche[i]
     except TypeError as e:
