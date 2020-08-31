@@ -138,7 +138,7 @@ env.bak/
 venv.bak/
 ubuntu-casa/
 bbo-flask/
-venv-windows
+venv-windows/
 
 
 # Spyder project settings
