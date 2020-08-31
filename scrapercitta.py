@@ -47,7 +47,7 @@ def getElement(url):
 
                     pomeriggio = sibling.next_sibling.next_sibling
 
-                    return sibling+' '+pomeriggio.strip()
+                    return sibling+' \n '+pomeriggio.strip()
         except AttributeError as e:
                     
                     if (str(e)== "'NoneType' object has no attribute 'td'"): ###AGGIUNGO IL LINK DI QUESTA BIBLIOTECA A UN FILE JSON
