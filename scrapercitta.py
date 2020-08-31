@@ -49,10 +49,10 @@ def getElement(url):
 
                     return sibling+' \n '+pomeriggio.strip()
         except AttributeError as e:
-                    
-                    if (str(e)== "'NoneType' object has no attribute 'td'"): ###AGGIUNGO IL LINK DI QUESTA BIBLIOTECA A UN FILE JSON
+                    ###Elenca biblio senza tabella e aggiungo a file json 
+                    if (str(e)== "'NoneType' object has no attribute 'td'"): 
                         biblio_senza_orario.append(url+"\n")
-                    return None
+                        return None
 
 
         
