@@ -34,7 +34,7 @@
                     
                 
                     {% for item in listaAperte %}
-                    <tr><td><a href="{{item.url}}">  {{item.nome}}</a></td><td>{{item.orario | replace ("['", "") | replace ("']", "") }}</td></tr>
+                    <tr><td><a href="{{item.url}}">  {{item.nome}}</a></td><td>{{item.orario  | replace ("['", "") | replace ("']", "") | replace ("', '", "\n") }}</td></tr>
 
                     {% endfor %}
                     
@@ -57,7 +57,7 @@
 
 
 
-        Nota: La biblioteca di Casazza ha eliminato l'orario dal suo sito
+        Nota: La biblioteche di Casazza e Arnaldo hanno eliminato l'orario dalla loro pagina
 
         <hr>
         <!-- Footer -->
@@ -74,7 +74,7 @@
 
                         <!-- Content -->
 
-                        <p>Gli orari si aggiornano ogni giorno in automatico</p>
+                        <p>Gli orari si aggiornano ogni giorno</p>
 
                     </div>
                     <!-- Grid column -->
@@ -123,7 +123,7 @@
         
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="static/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 

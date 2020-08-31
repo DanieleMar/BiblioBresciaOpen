@@ -8,7 +8,7 @@ from datetime import datetime
 Diz_Biblioteche = {
     'Ghetti': 'https://opac.provincia.brescia.it/library/biblioteca-v-ghetti-di-viale-caduti-del-lavoro/timetable/',
     'Ial': 'https://opac.provincia.brescia.it/library/biblioteca-ial-brescia/timetable/',
-    'Arnaldo': 'https://opac.provincia.brescia.it/library/ARNALDO-SCOLASTICA-/timetable/',
+    'Arnaldo': 'https://opac.provincia.brescia.it/library/ARNALDO-SCOLASTICA-/timetable/', #senza tabella orari
     'Abba Ballini': 'https://opac.provincia.brescia.it/library/ABBA-BALLINI-SCOLASTICA-/timetable/',
     'Gambara': 'https://opac.provincia.brescia.it/library/biblioteca-scolastica-isis-veronica-gambara/timetable/',
     'Buffalora': 'https://opac.provincia.brescia.it/library/buffalora/timetable/',
@@ -47,12 +47,12 @@ def getElement(url):
 
                     pomeriggio = sibling.next_sibling.next_sibling
 
-                    return sibling+' '+pomeriggio.strip()
+                    return sibling+' \n '+pomeriggio.strip()
         except AttributeError as e:
                     
                     if (str(e)== "'NoneType' object has no attribute 'td'"): ###AGGIUNGO IL LINK DI QUESTA BIBLIOTECA A UN FILE JSON
                         biblio_senza_orario.append(url+"\n")
-                    return(str(e))
+                    return None
 
 
         
