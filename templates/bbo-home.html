@@ -34,7 +34,7 @@
                     
                 
                     {% for item in listaAperte %}
-                    <tr><td><a href="{{item.url}}">  {{item.nome}}</a></td><td>{{item.orario  | replace ("['", "") | replace ("']", "") | replace ("'' , '", "\n") }}</td></tr>
+                    <tr><td><a href="{{item.url}}">  {{item.nome}}</a></td><td>{{item.orario  | replace ("['", "") | replace ("']", "") | replace ("', '", "\n") }}</td></tr>
 
                     {% endfor %}
                     
