@@ -1,19 +1,23 @@
 from flask import Flask, render_template, request
 import json
 from flask_bootstrap import Bootstrap
+import datetime
 
-#import per ricorrente
-""" import time
-import atexit
-from apscheduler.schedulers.background import BackgroundScheduler
- """
+
 app = Flask(__name__)
+
+
 
 def create_app():
   app = Flask(__name__)
   Bootstrap(app)
 
   return app
+
+@app.context_processor
+def inject_today_date():
+
+  return {'today_date': datetime.date.today().strftime("%d %B %Y")}
 
 
 
