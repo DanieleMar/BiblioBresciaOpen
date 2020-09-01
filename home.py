@@ -25,8 +25,8 @@ def inject_today_date():
 openjson=json.load(open("open.json", "r")) 
 chiusejson=json.load(open("chiuse.json", "r"))
 
-@app.route("/")
-#@app.route("/bresciabibliopen")
+#@app.route("/")
+@app.route("/BresciaBibliOpen")
 
 def load_page():
   try:
