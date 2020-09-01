@@ -26,7 +26,7 @@ openjson=json.load(open("open.json", "r"))
 chiusejson=json.load(open("chiuse.json", "r"))
 
 #@app.route("/")
-@app.route("/bresciabibliopen")
+@app.route("/")
 
 def load_page():
   try:
