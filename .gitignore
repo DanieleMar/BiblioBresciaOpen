@@ -2,7 +2,7 @@ requirements-old.txt
 open.json
 chiuse.json
 comandi-chiave-e-info
-
+.replit
 
 #ignora queste cartelle dis ettings
 __pycache__/
@@ -139,6 +139,7 @@ venv.bak/
 ubuntu-casa/
 bbo-flask/
 venv-windows/
+repl/
 
 
 # Spyder project settings
