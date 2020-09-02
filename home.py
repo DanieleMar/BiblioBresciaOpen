@@ -2,6 +2,9 @@ from flask import Flask, render_template, request
 import json
 from flask_bootstrap import Bootstrap
 import datetime
+import locale
+
+
 
 
 app = Flask(__name__)
@@ -14,9 +17,12 @@ def create_app():
 
   return app
 
+
+
 @app.context_processor
 def inject_today_date():
 
+  #locale.setlocale(locale.LC_TIME, 'it_IT') #traduce la data in italiano
   return {'today_date': datetime.date.today().strftime("%d %B %Y")}
 
 
@@ -44,7 +50,7 @@ def load_page():
 
 
 if __name__ == '__main__':
-  #app.run(debug=True, host='0.0.0.0') #per repl.it
-  app.run(debug=True) #per il resto
+  app.run(debug=True, host='0.0.0.0') #per repl.it
+  #app.run(debug=True) #per il resto
 
 
