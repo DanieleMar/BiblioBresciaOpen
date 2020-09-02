@@ -6,7 +6,7 @@ x=datetime.today()
 print(x) 
 #y=x.replace(day=x.day+1, hour=4, minute=30, second=0, microsecond=0) giusto, ogni giorno alle 3 
 
-y=x.replace(day=x.day, hour=12, minute=13, second=0, microsecond=0) 
+y=x.replace(day=x.day+1, hour=3, minute=31, second=0, microsecond=0) 
 delta_t=y-x 
 print(y) 
 print(delta_t) 
