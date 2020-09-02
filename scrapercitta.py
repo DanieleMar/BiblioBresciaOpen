@@ -29,87 +29,88 @@ Diz_Biblioteche = {
 
 biblio_senza_orario=[]
 
-def getElement(url):
-    try:
-        html = urlopen(url)
-    except HTTPError as e:
-        return e  # eccezione per url vuoto
-    try:
-        bs = BeautifulSoup(html.read(), 'html.parser')
-        elem = bs.title  # ottengo elemento che mi serve
-
-        # prelevo orario di oggi
+def run():
+    def getElement(url):
         try:
-            for sibling in bs.find('div', id="timetable").td.next_sibling.next_sibling:
-                if ("Chiusa" in sibling):
-                    return "chiusa"
-                else:
+            html = urlopen(url)
+        except HTTPError as e:
+            return e  # eccezione per url vuoto
+        try:
+            bs = BeautifulSoup(html.read(), 'html.parser')
+            elem = bs.title  # ottengo elemento che mi serve
 
-                    pomeriggio = sibling.next_sibling.next_sibling
+            # prelevo orario di oggi
+            try:
+                for sibling in bs.find('div', id="timetable").td.next_sibling.next_sibling:
+                    if ("Chiusa" in sibling):
+                        return "chiusa"
+                    else:
 
-                    return sibling+' \n '+pomeriggio.strip()
+                        pomeriggio = sibling.next_sibling.next_sibling
+
+                        return sibling+' \n '+pomeriggio.strip()
+            except AttributeError as e:
+                        ###Elenca biblio senza tabella e aggiungo a file json 
+                        if (str(e)== "'NoneType' object has no attribute 'td'"): 
+                            biblio_senza_orario.append(url+"\n")
+                            return None
+
+
+            
         except AttributeError as e:
-                    ###Elenca biblio senza tabella e aggiungo a file json 
-                    if (str(e)== "'NoneType' object has no attribute 'td'"): 
-                        biblio_senza_orario.append(url+"\n")
-                        return None
+            return e 
+        return elem
 
 
+    biblio_aperte_dict = {}
+    biblio_chiuse = []
+    biblio_aperte_prejson = {}
+    biblio_chiuse_dict = {}
+
+    for i in Diz_Biblioteche:
+
+        orario = getElement(Diz_Biblioteche[i])
+        try:
+            if "chiusa" in orario:
+                biblio_chiuse_dict.setdefault('chiuse', [])
+                # ottengo url della biblioteca e non della sua tabella orario. pop elimina spazio bianco da lista
+                biblio_chiuse_dict['chiuse'].append(
+                    {'nome': i, 'url': Diz_Biblioteche[i].split("/timetable/").pop(0)})
         
-    except AttributeError as e:
-        return e 
-    return elem
-
-
-biblio_aperte_dict = {}
-biblio_chiuse = []
-biblio_aperte_prejson = {}
-biblio_chiuse_dict = {}
-
-for i in Diz_Biblioteche:
-
-    orario = getElement(Diz_Biblioteche[i])
-    try:
-        if "chiusa" in orario:
-            biblio_chiuse_dict.setdefault('chiuse', [])
-            # ottengo url della biblioteca e non della sua tabella orario. pop elimina spazio bianco da lista
-            biblio_chiuse_dict['chiuse'].append(
-                {'nome': i, 'url': Diz_Biblioteche[i].split("/timetable/").pop(0)})
-    
+            
         
-    
-        else:
+            else:
 
-            #  #creo un dizionario che salva solo le biblioteche aperte oggi
-            biblio_aperte_dict.setdefault('biblio', [])
-            biblio_aperte_dict['biblio'].append({'nome': i, 'orario': orario.strip().split(
-                "\n"), "url": Diz_Biblioteche[i].split("/timetable/").pop(0)})
-         
-            # implemento: URL IN nome biblioteca
-            # elimino /timetable da Diz_Biblioteche[i]
-    except TypeError as e:
-        print (e)
+                #  #creo un dizionario che salva solo le biblioteche aperte oggi
+                biblio_aperte_dict.setdefault('biblio', [])
+                biblio_aperte_dict['biblio'].append({'nome': i, 'orario': orario.strip().split(
+                    "\n"), "url": Diz_Biblioteche[i].split("/timetable/").pop(0)})
+            
+                # implemento: URL IN nome biblioteca
+                # elimino /timetable da Diz_Biblioteche[i]
+        except TypeError as e:
+            print (e)
 
-biblio_aperte_json = json.dumps(biblio_aperte_dict)  # trasformo dict in json
-biblio_chiuse_json = json.dumps(biblio_chiuse_dict)  # trasformo dict in json
-runninglog = "\n" + str(datetime.now())  # log di esecuzione
-
-
-f1 = open("runninglog.txt", "a")
-f1.write(runninglog)
-f1.close
-
-# creo json aperte
-f2 = open("open.json", "w")
-f2.write(biblio_aperte_json)
-f2.close
+    biblio_aperte_json = json.dumps(biblio_aperte_dict)  # trasformo dict in json
+    biblio_chiuse_json = json.dumps(biblio_chiuse_dict)  # trasformo dict in json
+    runninglog = "\n" + str(datetime.now())  # log di esecuzione
 
 
-# creo json chiuse
-f3 = open("chiuse.json", "w")
-f3.write(str(biblio_chiuse_json))
-f3.close
+    f1 = open("runninglog.txt", "a")
+    f1.write(runninglog)
+    f1.close
 
-f4 = open("biblio_orari_assenti.txt", "w")
-f4.write(str(biblio_senza_orario))
-f4.close
+    # creo json aperte
+    f2 = open("open.json", "w")
+    f2.write(biblio_aperte_json)
+    f2.close
+
+
+    # creo json chiuse
+    f3 = open("chiuse.json", "w")
+    f3.write(str(biblio_chiuse_json))
+    f3.close
+
+    f4 = open("biblio_orari_assenti.txt", "w")
+    f4.write(str(biblio_senza_orario))
+    f4.close
