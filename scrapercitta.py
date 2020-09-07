@@ -114,3 +114,5 @@ def run():
     f4 = open("biblio_orari_assenti.txt", "w")
     f4.write(str(biblio_senza_orario))
     f4.close
+
+run()
