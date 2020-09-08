@@ -10,46 +10,53 @@
 </head>
 
 <body>
-   
+
+    <div class="container-fluid">
 
 
-    <div class="jumbotron jumbotron-fluid text-white bg-danger">
-        <div class="container">
-            <h1 class="display-4">BiblioBresciaOpen</h1>
-            <p class="lead">Il primo sito che ti mostra quali Biblioteche di Brescia sono aperte ora, in una sola pagina
+        <div class="jumbotron jumbotron-fluid text-white bg-danger text-center">
+            <h1 class="display-4 text-center">BiblioBresciaOpen</h1>
+            <p class="lead">Il primo sito che ti mostra quali Biblioteche di Brescia sono aperte ora, in una sola
+                pagina
             </p>
         </div>
-    </div>
 
- 
 
-    <div class="container">
-	
-        <p style="text-align:center"> Orario aggiornato al {{today_date}} (Oggi)</p>
+
+
         <div class="row">
-            <div class="col-sm">
+            <p style="text-align:center"> Orario aggiornato al {{today_date}} (Oggi)</p>
+        </div>
+        <div class="row">
+            <div class="col">
                 <h2>Aperte Oggi</h2>
                 <table class="table" id="biblioaperte">
 
-                    
-                    
-                
+
+
+
                     {% for item in listaAperte %}
-                    <tr><td><a href="{{item.url}}">  {{item.nome}}</a></td><td>{{item.orario  | replace ("['", "") | replace ("']", "") | replace ("', '", "\n") }}</td></tr>
+                    <tr>
+                        <td><a href="{{item.url}}"> {{item.nome}}</a></td>
+                        <td>{{item.orario  | replace ("['", "") | replace ("']", "") | replace ("', '", "\n") }}
+                        </td>
+                    </tr>
 
                     {% endfor %}
-                    
+
                 </table>
             </div>
-            <div class="col-sm">
+            <div class="col">
                 <h2>Chiuse Oggi</h2>
                 <table class="table" id="chiuse">
 
                     {% for item in listaChiuse %}
-                   
-                    <tr><td><a href="{{item.url}}">  {{item.nome}}</a></td><td>{{item.orario | replace ("['", "") | replace ("']", "") }}
-                    </td>
-                    {% endfor %}
+
+                    <tr>
+                        <td><a href="{{item.url}}"> {{item.nome}}</a></td>
+                        <td>{{item.orario | replace ("['", "") | replace ("']", "") }}
+                        </td>
+                        {% endfor %}
                 </table>
 
             </div>
@@ -57,74 +64,27 @@
         </div>
 
 
+        <div class="row ">
+            <div class="col text-center"> Nota: La biblioteche di Casazza e Arnaldo hanno eliminato l'orario dalla loro
+                pagina</div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
 
-        Nota: La biblioteche di Casazza e Arnaldo hanno eliminato l'orario dalla loro pagina
-
-        <hr>
-        <!-- Footer -->
-        <footer class="page-footer font-small pt-4">
-
-            <!-- Footer Links -->
-            <div class="container-fluid text-center text-md-left">
-
-                <!-- Grid row -->
-                <div class="row">
-
-                    <!-- Grid column -->
-                    <div class="col-md-6 mt-md-0 mt-3">
-
-                        <!-- Content -->
-
-                        <p>Gli orari si aggiornano ogni giorno</p>
-
-                    </div>
-                    <!-- Grid column -->
-
-                    <hr class="clearfix w-100 d-md-none pb-3">
-
-                    <!-- Grid column -->
-                    <div class="col-md-3 mb-md-0 mb-3">
-
-                        <!-- Links -->
-
-
-                        <a href="mailto:danielemariotto@gmail.com">Contattami</a>
-
-
-
-                    </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div class="col-md-3 mb-md-0 mb-3">
-
-                        <!-- Links -->
-
-
-
-
-                    </div>
-                    <!-- Grid column -->
-
-                </div>
-                <!-- Grid row -->
-
-            </div>
-            <!-- Footer Links -->
-
-            <!-- Copyright -->
-            <div class="footer-copyright text-center py-3">© 2020 Copyright
-                Daniele Mariotto
+                <p>Gli orari si aggiornano ogni giorno</p>
+                <hr>
+                <a href="mailto:danielemariotto@gmail.com">Contattami</a>
+                © 2020 Copyright - Daniele Mariotto
+                <br><br><br>
             </div>
             <!-- Copyright -->
-
-        </footer>
-        <!-- Footer -->
-
+        </div>
         
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="static/bootstrap/js/bootstrap.min.js"></script>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 
