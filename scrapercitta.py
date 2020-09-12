@@ -86,7 +86,9 @@ def run():
 
                 biblio_aperte_dict.setdefault('biblio', []) # creo il dizionario che salva solo le biblioteche aperte oggi
                 biblio_aperte_dict['biblio'].append({'nome': i, 'orario': orario.strip().split(
-                    "\n"), "url": Biblioteche_citta[i].split("/timetable/").pop(0)}) #core element: inserisce nel dizionario il nome, l'orario e l'url.
+                    "\n"), "url": Biblioteche_citta[i].split("/timetable/").pop(0)}) # core element: inserisce nel dizionario il nome, l'orario e l'url. strip rimuove gi spazi bianchi. split("\n") separa in due campi separati gli orari doppi. 
+                    # pop(0) elimina parte inutile in url
+                    # split(/"timetable/") serve a rimandare alla pagina principale sul sito opac di ogni biblioteca (invece che alla tabella orari)
             
           
         except TypeError as e:
