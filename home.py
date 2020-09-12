@@ -22,7 +22,7 @@ def create_app():
 @app.context_processor
 def inject_today_date():
 
-  locale.setlocale(locale.LC_TIME, 'it_IT.UTF-8') #traduce la data in italiano
+  #locale.setlocale(locale.LC_TIME, 'it_IT.UTF-8') #traduce la data in italiano
   return {'today_date': datetime.date.today().strftime("%d %B %Y")}
 
 
