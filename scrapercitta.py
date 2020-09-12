@@ -5,10 +5,12 @@ import re
 import json
 from datetime import datetime
 
-Diz_Biblioteche = {
+
+
+Biblioteche_citta = {
     'Ghetti': 'https://opac.provincia.brescia.it/library/biblioteca-v-ghetti-di-viale-caduti-del-lavoro/timetable/',
     'Ial': 'https://opac.provincia.brescia.it/library/biblioteca-ial-brescia/timetable/',
-    'Arnaldo': 'https://opac.provincia.brescia.it/library/ARNALDO-SCOLASTICA-/timetable/', #senza tabella orari
+    'Arnaldo': 'https://opac.provincia.brescia.it/library/ARNALDO-SCOLASTICA-/timetable/', 
     'Abba Ballini': 'https://opac.provincia.brescia.it/library/ABBA-BALLINI-SCOLASTICA-/timetable/',
     'Gambara': 'https://opac.provincia.brescia.it/library/biblioteca-scolastica-isis-veronica-gambara/timetable/',
     'Buffalora': 'https://opac.provincia.brescia.it/library/buffalora/timetable/',
@@ -30,27 +32,28 @@ Diz_Biblioteche = {
 biblio_senza_orario=[]
 
 def run():
-    def getElement(url):
+    def ottieni_orario(url):
         try:
-            html = urlopen(url)
+            html = urlopen(url) # apre url
         except HTTPError as e:
             return e  # eccezione per url vuoto
         try:
             bs = BeautifulSoup(html.read(), 'html.parser')
-            elem = bs.title  # ottengo elemento che mi serve
+            elem = bs.title  # ottengo nome della biblioteca
 
             # prelevo orario di oggi
             try:
-                for sibling in bs.find('div', id="timetable").td.next_sibling.next_sibling:
+                for sibling in bs.find('div', id="timetable").td.next_sibling.next_sibling: # prelevo primo orario
                     if ("Chiusa" in sibling):
-                        return "chiusa"
+                        return "chiusa" # ritorna chiusa se la biblioteca è chiusa
                     else:
 
-                        pomeriggio = sibling.next_sibling.next_sibling
+                        pomeriggio = sibling.next_sibling.next_sibling # prendo l'orario del pomeriggio nel caso ci sia doppio orario
 
-                        return sibling+' \n '+pomeriggio.strip()
+                        return sibling+' \n '+pomeriggio.strip() # restituisco l'orario 
             except AttributeError as e:
-                        ###Elenca biblio senza tabella e aggiungo a file json 
+                        ### Elenca biblio senza tabella e aggiungo a file json.
+                        ### Utile per avere sott'occhio subito quali biblioteche hanno cancellato l'orario
                         if (str(e)== "'NoneType' object has no attribute 'td'"): 
                             biblio_senza_orario.append(url+"\n")
                             return None
@@ -59,44 +62,42 @@ def run():
             
         except AttributeError as e:
             return e 
-        return elem
+        return elem # ritorna l'orario di apertura
 
 
     biblio_aperte_dict = {}
-    biblio_chiuse = []
-    biblio_aperte_prejson = {}
     biblio_chiuse_dict = {}
 
-    for i in Diz_Biblioteche:
+    for i in Biblioteche_citta:
 
-        orario = getElement(Diz_Biblioteche[i])
+        orario = ottieni_orario(Biblioteche_citta[i]) 
         try:
             if "chiusa" in orario:
-                biblio_chiuse_dict.setdefault('chiuse', [])
-                # ottengo url della biblioteca e non della sua tabella orario. pop elimina spazio bianco da lista
+                biblio_chiuse_dict.setdefault('chiuse', []) # inserisco elemento radice in file json. rende più immediato l'inserimento delle biblioteche chiuse
+         
                 biblio_chiuse_dict['chiuse'].append(
-                    {'nome': i, 'url': Diz_Biblioteche[i].split("/timetable/").pop(0)})
+                    {'nome': i, 'url': Biblioteche_citta[i].split("/timetable/").pop(0)})
+                    # ottengo url della biblioteca utilizzato per il link cliccabile dall'utente.
+                    # pop elimina lo spazio bianco dalla lista
         
             
         
             else:
 
-                #  #creo un dizionario che salva solo le biblioteche aperte oggi
-                biblio_aperte_dict.setdefault('biblio', [])
+                biblio_aperte_dict.setdefault('biblio', []) # creo il dizionario che salva solo le biblioteche aperte oggi
                 biblio_aperte_dict['biblio'].append({'nome': i, 'orario': orario.strip().split(
-                    "\n"), "url": Diz_Biblioteche[i].split("/timetable/").pop(0)})
+                    "\n"), "url": Biblioteche_citta[i].split("/timetable/").pop(0)}) #core element: inserisce nel dizionario il nome, l'orario e l'url.
             
-                # implemento: URL IN nome biblioteca
-                # elimino /timetable da Diz_Biblioteche[i]
+          
         except TypeError as e:
             print (e)
 
-    biblio_aperte_json = json.dumps(biblio_aperte_dict)  # trasformo dict in json
-    biblio_chiuse_json = json.dumps(biblio_chiuse_dict)  # trasformo dict in json
+    biblio_aperte_json = json.dumps(biblio_aperte_dict)  # trasformo dizionario in json
+    biblio_chiuse_json = json.dumps(biblio_chiuse_dict)  # trasformo dizionario in json
     runninglog = "\n" + str(datetime.now())  # log di esecuzione
 
 
-    f1 = open("runninglog.txt", "a")
+    f1 = open("runninglog.txt", "a") #file di log
     f1.write(runninglog)
     f1.close
 
@@ -111,6 +112,7 @@ def run():
     f3.write(str(biblio_chiuse_json))
     f3.close
 
+    # txt con tutte le biblioteche senza orario sul sito
     f4 = open("biblio_orari_assenti.txt", "w")
     f4.write(str(biblio_senza_orario))
     f4.close
