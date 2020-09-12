@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 def create_app():
   app = Flask(__name__)
-  Bootstrap(app)
+  Bootstrap(app) 
 
   return app
 
@@ -22,7 +22,7 @@ def create_app():
 @app.context_processor
 def inject_today_date():
 
-  #locale.setlocale(locale.LC_TIME, 'it_IT') #traduce la data in italiano
+  #TODO locale.setlocale(locale.LC_TIME, 'it_IT') #traduce la data in italiano
   return {'today_date': datetime.date.today().strftime("%d %B %Y")}
 
 
@@ -31,7 +31,7 @@ def inject_today_date():
 openjson=json.load(open("open.json", "r")) 
 chiusejson=json.load(open("chiuse.json", "r"))
 
-#@app.route("/")
+
 @app.route("/")
 
 def load_page():
@@ -50,7 +50,7 @@ def load_page():
 
 
 if __name__ == '__main__':
-  app.run(debug=True, host='0.0.0.0') #per repl.it
-  #app.run(debug=True) #per il resto
+  #app.run(debug=True)  #per debug
+  app.run() 
 
-
+  
