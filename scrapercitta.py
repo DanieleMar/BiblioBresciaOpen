@@ -27,7 +27,7 @@ Biblioteche_citta = {
     'Sala Umberto Eco': 'https://opac.provincia.brescia.it/library/sala-di-lettura-umberto-eco/timetable/',
     'Trebeschi': 'https://opac.provincia.brescia.it/library/fondazione-trebeschi/timetable/',
     'Villaggio Sereno': 'https://opac.provincia.brescia.it/library/sereno/timetable/',
-    'Casazza': 'https://opac.provincia.brescia.it/library/casazza/timetable'
+    
 }
 
 biblio_senza_orario=[]
@@ -86,6 +86,7 @@ def run():
             else:
 
                 biblio_aperte_dict.setdefault('biblio', []) # creo il dizionario che salva solo le biblioteche aperte oggi
+                
                 biblio_aperte_dict['biblio'].append({'nome': i, 'orario': orario.strip().split(
                     "\n"), "url": Biblioteche_citta[i].split("/timetable/").pop(0)}) # core element: inserisce nel dizionario il nome, l'orario e l'url. strip rimuove gi spazi bianchi. split("\n") separa in due campi separati gli orari doppi. 
                     # pop(0) elimina parte inutile in url
