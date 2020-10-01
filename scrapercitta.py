@@ -40,11 +40,14 @@ def run():
             return e  # eccezione per url vuoto
         try:
             bs = BeautifulSoup(html.read(), 'html.parser')
-            elem = bs.title  # ottengo nome della biblioteca
-
+  
+            elem = bs.title  # inutile @@elimino
+            
+            nomebiblio= bs.find("h2", property="name").get_text() ##Ottengo dalla pagina il nome della biblio 
             # prelevo orario di oggi
             try:
                 for sibling in bs.find('div', id="timetable").td.next_sibling.next_sibling: # prelevo primo orario
+                 
                     if ("Chiusa" in sibling):
                         return "chiusa" # ritorna chiusa se la biblioteca è chiusa
                     else:
@@ -56,19 +59,23 @@ def run():
                         ### Elenca biblio senza tabella e aggiungo a file json.
                         ### Utile per avere sott'occhio subito quali biblioteche hanno cancellato l'orario
                         if (str(e)== "'NoneType' object has no attribute 'td'"): 
-                            biblio_senza_orario.append(url+"\n")
+                            
+
+                            biblio_senza_orario.append(nomebiblio) ##per elenco di biblio chiuse
                             return None
 
 
             
         except AttributeError as e:
             return e 
-        return elem # ritorna l'orario di apertura
+        print(elem) 
+        return elem #  capire se posso toglierla 
 
 
     biblio_aperte_dict = {}
     biblio_chiuse_dict = {}
-
+    
+    # creo dict con orari
     for i in Biblioteche_citta:
 
         orario = ottieni_orario(Biblioteche_citta[i]) 
