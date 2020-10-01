@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/style.css') }}">
     <!-- Required meta tags -->
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
 </head>
 
@@ -22,8 +21,7 @@
 
         <div class="col jumbotron jumbotron-fluid text-white bg-danger text-center">
             <h1 class="lead display-4 text-center" style="word-wrap: break-word;">Biblio Brescia Open</h1>
-            <p class="lead">Il primo sito che ti mostra quali Biblioteche di Brescia sono aperte oggi, in una sola
-                pagina
+            <p class="lead">Il primo sito che ti mostra quali Biblioteche di Brescia sono aperte oggi, in una sola pagina
             </p>
         </div>
 
@@ -34,7 +32,7 @@
             <p class="text-center"> Orario aggiornato al {{today_date}} (Oggi)</p>
         </div>
         <div class="row">
-            <div class="col- ">
+            <div class="col">
                 <h2 class="text-center">Aperte Oggi</h2>
                 <table class="table" id="biblioaperte">
 
@@ -44,8 +42,8 @@
                     {% for item in listaAperte %}
                     <tr>
                         <td><a href="{{item.url}}"> {{item.nome}}</a></td>
-                        <td>{{item.orario  | replace ("['", "") | replace ("']", "") | replace ("', '", "\n") }}
-                              <!-- stampa orario della biblioteca. i replace rimuovono parti graficamente indesiderate -->
+                        <td>{{item.orario | replace ("['", "") | replace ("']", "") | replace ("', '", "\n") }}
+                            <!-- stampa orario della biblioteca. i replace rimuovono parti graficamente indesiderate -->
                         </td>
                     </tr>
 
@@ -60,8 +58,9 @@
                     {% for item in listaChiuse %}
 
                     <tr>
-                        <td><a href="{{item.url}}"> {{item.nome}}</a></td> <!-- stampa nome biblioteca-->
-                        <td>{{item.orario | replace ("['", "") | replace ("']", "") }} 
+                        <td><a href="{{item.url}}"> {{item.nome}}</a></td>
+                        <!-- stampa nome biblioteca-->
+                        <td>{{item.orario | replace ("['", "") | replace ("']", "") }}
                             <!-- stampa orario della biblioteca. i replace rimuovono parti graficamente indesiderate -->
                         </td>
                         {% endfor %}
@@ -82,8 +81,7 @@
                 <p>Gli orari si aggiornano ogni giorno</p>
                 <hr>
                 <a href="mailto:daniele@danielemariotto.it">Contatta Daniele</a>
-                <br>
-                © 2020 Copyright - Daniele Mariotto
+                <br> © 2020 Copyright - Daniele Mariotto
                 <br><br><br>
             </div>
             <!-- Copyright -->
@@ -93,15 +91,9 @@
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </body>
 
 </html>
