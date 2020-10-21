@@ -27,6 +27,7 @@ Biblioteche_citta = {
     'Sala Umberto Eco': 'https://opac.provincia.brescia.it/library/sala-di-lettura-umberto-eco/timetable/',
     'Trebeschi': 'https://opac.provincia.brescia.it/library/fondazione-trebeschi/timetable/',
     'Villaggio Sereno': 'https://opac.provincia.brescia.it/library/sereno/timetable/',
+    'Casazza': 'https://opac.provincia.brescia.it/library/casazza/timetable'
     
 }
 
