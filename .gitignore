@@ -7,7 +7,7 @@ requirements-old.txt
 comandi-chiave-e-info
 biblio_orari_assenti.txt
 runninglog.txt
-task
+task&info4dev
 
 .replit
 
@@ -171,7 +171,3 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
-
-
-
-
