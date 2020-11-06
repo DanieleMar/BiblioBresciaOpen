@@ -1,18 +1,18 @@
+#json
+open.json
+chiuse.json
+
+#file di testo
 requirements-old.txt
-open.json
-chiuse.json
 comandi-chiave-e-info
-.replit
-chiuse.json
-open.json
 runninglog.txt
 biblio_orari_assenti.txt
-chiuse.json
-open.json
 runninglog.txt
 task
 
-#ignora queste cartelle di settings
+.replit
+
+# settings
 __pycache__/
 .vscode/
 
