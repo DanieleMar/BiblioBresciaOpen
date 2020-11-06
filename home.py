@@ -23,13 +23,13 @@ def create_app():
 def inject_today_date():
 
   locale.setlocale(locale.LC_TIME, 'it_IT.UTF-8') #traduce la data in italiano
-  return {'today_date': datetime.date.today().strftime("%d %B %Y")}
+  return {'today_date': datetime.date.today().strftime("%d %B %Y")} #mostra data
 
 
 
 
-openjson=json.load(open("dati/open.json", "r")) 
-chiusejson=json.load(open("dati/chiuse.json", "r"))
+openjson = json.load(open("dati/open.json", "r")) 
+chiusejson = json.load(open("dati/chiuse.json", "r"))
 
 
 @app.route("/")
@@ -38,8 +38,8 @@ def load_page():
   try:
       return render_template('bbo-home.html', listaAperte=openjson["biblio"], listaChiuse=chiusejson["chiuse"]) 
   except KeyError as e:
-    print("errore è: "+ str(e))
-    if str(e)=="'biblio'":
+    print("Errore: "+ str(e))
+    if str(e)=="'biblio'": #se nessuna biblio è aperta, lascia la tabella vuota
       return render_template('bbo-home.html', listaAperte="", listaChiuse=chiusejson["chiuse"])
     return (str(e))
     
