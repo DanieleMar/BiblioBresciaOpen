@@ -28,8 +28,8 @@ def inject_today_date():
 
 
 
-openjson=json.load(open("open.json", "r")) 
-chiusejson=json.load(open("chiuse.json", "r"))
+openjson=json.load(open("dati/open.json", "r")) 
+chiusejson=json.load(open("dati/chiuse.json", "r"))
 
 
 @app.route("/")

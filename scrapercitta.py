@@ -109,23 +109,23 @@ def run():
     runninglog = "\n" + str(datetime.now())  # log di esecuzione
 
 
-    f1 = open("runninglog.txt", "a") #file di log
+    f1 = open("dati/runninglog.txt", "a") #file di log
     f1.write(runninglog)
     f1.close
 
     # creo json aperte
-    f2 = open("open.json", "w")
+    f2 = open("dati/open.json", "w")
     f2.write(biblio_aperte_json)
     f2.close
 
 
     # creo json chiuse
-    f3 = open("chiuse.json", "w")
+    f3 = open("dati/chiuse.json", "w")
     f3.write(str(biblio_chiuse_json))
     f3.close
 
     # txt con tutte le biblioteche senza orario sul sito
-    f4 = open("biblio_orari_assenti.txt", "w")
+    f4 = open("dati/biblio_orari_assenti.txt", "w")
     f4.write(str(biblio_senza_orario))
     f4.close
 
