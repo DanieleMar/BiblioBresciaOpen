@@ -3,13 +3,20 @@ open.json
 chiuse.json
 comandi-chiave-e-info
 .replit
+chiuse.json
+open.json
+runninglog.txt
+biblio_orari_assenti.txt
+chiuse.json
+open.json
+runninglog.txt
+task
 
-#ignora queste cartelle dis ettings
+#ignora queste cartelle di settings
 __pycache__/
 .vscode/
 
 ###per vscode
-  
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -165,14 +172,7 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
-chiuse.json
-open.json
-runninglog.txt
-biblio_orari_assenti.txt
-<<<<<<< HEAD
-=======
-chiuse.json
-open.json
-runninglog.txt
->>>>>>> 3341ff79797a4317867e260085356c2a846fa2c7
-task
+
+
+
+
