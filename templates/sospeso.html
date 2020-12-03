@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/style.css') }}">
+    <!-- Required meta tags -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+<body>
+
+
+    <div class="container-xl">
+
+
+        <div class="col jumbotron jumbotron-fluid text-white bg-danger text-center">
+            <h1 class="lead display-4 text-center" style="word-wrap: break-word;">Biblio Brescia Open</h1>
+            <p class="lead">Il primo sito che ti mostra quali Biblioteche di Brescia sono aperte oggi, in una sola pagina
+            </p>
+        </div>
+
+
+
+
+        <div class="row justify-content-center">
+            <p class="text-center"> Orario aggiornato al {{today_date}} (Oggi)</p>
+        </div>
+
+        <h4  class="row justify-content-center">Le biblioteche sono chiuse
+        </h4>
+    
+        <div  class="row justify-content-center text-center">Per l'emergenza sanitaria, le biblioteche restano chiuse al pubblico. <br>
+            E' comunque possibile consegnare i libri negli appositi contenitori posizionati fuori dalle biblioteche.
+        </div>
+
+        <div  class="row justify-content-center"><a href="https://opac.provincia.brescia.it/news-2017/la-cultura-resta-la-rbbc-c-e-2/">Scopri di più</a></div>
+    </div>
+      <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+</body>
+</html>
