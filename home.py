@@ -51,7 +51,7 @@ def load_page():
 
 
 if __name__ == '__main__':
-  app.run(debug=True)  #per debug
- # app.run() 
+ # app.run(debug=True)  #per debug
+  app.run() 
 
   
