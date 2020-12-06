@@ -32,22 +32,23 @@ openjson = json.load(open("dati/open.json", "r"))
 chiusejson = json.load(open("dati/chiuse.json", "r"))
 
 # FUNZIONA. MA CAMBIO PER FARE PAGINA TEMPORANEA
-# @app.route("/")
+@app.route("/")
 
-# def load_page():
-  # try:
-  #     return render_template('bbo-home.html', listaAperte=openjson["biblio"], listaChiuse=chiusejson["chiuse"]) 
-  # except KeyError as e:
-  #   print("Errore: "+ str(e))
-  #   if str(e)=="'biblio'": #se nessuna biblio è aperta, lascia la tabella vuota
-  #     return render_template('bbo-home.html', listaAperte="", listaChiuse=chiusejson["chiuse"])
-  #   return (str(e))
+def load_page():
+  try:
+      return render_template('bbo-home.html', listaAperte=openjson["biblio"], listaChiuse=chiusejson["chiuse"]) 
+  except KeyError as e:
+    print("Errore: "+ str(e))
+    if str(e)=="'biblio'": #se nessuna biblio è aperta, lascia la tabella vuota
+      return render_template('bbo-home.html', listaAperte="", listaChiuse=chiusejson["chiuse"])
+    return (str(e))
     
       
 
-@app.route("/")
-def load_page():
-  return render_template('sospeso.html') 
+## USATO QUANDO HANNO CHIUSO LE BIBLIOTECHE PER LOCKDOWN
+# @app.route("/")
+# def load_page():
+#   return render_template('sospeso.html') 
 
 
 if __name__ == '__main__':
