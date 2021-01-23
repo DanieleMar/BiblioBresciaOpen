@@ -4,8 +4,12 @@ from urllib.error import HTTPError
 import re
 import json
 from datetime import datetime
+import os
+
 # import connection
 
+fileDir = os.path.dirname(os.path.abspath(__file__))
+parentDir = os.path.dirname(fileDir)
 
 Biblioteche_citta = {
     'Ghetti': 'https://opac.provincia.brescia.it/library/biblioteca-v-ghetti-di-viale-caduti-del-lavoro/timetable/',
@@ -111,7 +115,7 @@ def run():
     runninglog = "\n" + str(datetime.now())  # log di esecuzione
 
 
-    f1 = open("dati/runninglog.txt", "a") #file di log
+    f1 = open(parentDir+"/dati/runninglog.txt", "a") #file di log
     f1.write(runninglog)
     f1.close
 
@@ -119,18 +123,18 @@ def run():
 
     def writeOnJson():
         # crea json di biblio aperte
-        f2 = open("/dati/open.json", "w")
+        f2 = open(parentDir+"/dati/open.json", "w")
         f2.write(biblio_aperte_json)
         f2.close
 
 
         # crea json chiuse
-        f3 = open("/dati/chiuse.json", "w")
+        f3 = open(parentDir+"/dati/chiuse.json", "w")
         f3.write(str(biblio_chiuse_json))
         f3.close
 
         # txt con tutte le biblioteche senza orario sul sito Opac
-        f4 = open("/dati/biblio_orari_assenti.txt", "w")
+        f4 = open(parentDir+"/dati/biblio_orari_assenti.txt", "w")
         f4.write(str(biblio_senza_orario))
         f4.close
 
