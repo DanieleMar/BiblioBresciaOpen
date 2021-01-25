@@ -94,17 +94,24 @@ def run():
                     {'nome': i, 'url': Biblioteche_citta[i].split("/timetable/").pop(0)})
                     # ottiene l'url della biblioteca utilizzato per il link cliccabile dall'utente.
                     # pop elimina lo spazio bianco dalla lista
-        
+
+                url= Biblioteche_citta[i].split("/timetable/").pop(0)
+                connectionDB.updateDB('chiuse', i, url) ## add to db single biblio-- working on
+                
             
         
             else:
 
                 biblio_aperte_dict.setdefault('biblio', []) # crea il dizionario che salva solo le biblioteche aperte oggi
                 
+
+
                 biblio_aperte_dict['biblio'].append({'nome': i, 'orario': orario.strip().split("\n"), "url": Biblioteche_citta[i].split("/timetable/").pop(0)}) # core element: inserisce nel dizionario il nome, l'orario e l'url. strip rimuove gi spazi bianchi. split("\n") separa in due campi separati gli orari doppi. 
                     # pop(0) elimina parte inutile in url
                     # split(/"timetable/") serve a rimandare alla pagina principale sul sito opac di ogni biblioteca (invece che alla tabella orari)
-            
+                orarioFormatted = orario.strip().split
+                url = Biblioteche_citta[i].split("/timetable/").pop(0)
+                connectionDB.updateDB('aperte',i, orarioFormatted,  url)
           
         except TypeError as e:
             print (e)
@@ -142,6 +149,6 @@ def run():
     # def writeOnDb():
 
 
-# run()
+run()
 
-connectionDB()
+connectionDB.updateDB()
