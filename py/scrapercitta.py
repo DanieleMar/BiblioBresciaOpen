@@ -5,8 +5,7 @@ import re
 import json
 from datetime import datetime
 import os
-
-# import connection
+import connectionDB
 
 fileDir = os.path.dirname(os.path.abspath(__file__))
 parentDir = os.path.dirname(fileDir)
@@ -140,8 +139,9 @@ def run():
 
     writeOnJson()
 
-
     # def writeOnDb():
 
 
-run()
+# run()
+
+connectionDB()
