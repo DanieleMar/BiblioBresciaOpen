@@ -1,30 +1,29 @@
 import sqlite3, os
 
-def connectDB():
-        conn = sqlite3.connect('./manageDB/dbFiles/orari.db')
+def updateDB(nome, url):
+    try:
+        sqliteConnection = sqlite3.connect('./manageDB/dbFiles/orari.db')
+        cursor = sqliteConnection.cursor()
+        print("Connected to SQLite")
+
+        sqlite_insert_with_param = """INSERT INTO chiuse
+                          (nome, url) 
+                          VALUES (?, ?);"""
+
+        data_tuple = (nome, url)
+        cursor.execute(sqlite_insert_with_param, data_tuple)
+        sqliteConnection.commit()
+        print("Python Variables inserted successfully into SqliteDb_developers table")
+
+        cursor.close()
+
+    except sqlite3.Error as error:
+        print("Failed to insert Python variable into sqlite table", error)
+    finally:
+        if (sqliteConnection):
+            sqliteConnection.close()
+            print("The SQLite connection is closed")
 
 
-
-        c = conn.cursor()
-
-        # Create table
-        # c.execute('''CREATE TABLE open
-        #              (nome text, orario text, url text)''')
-
-        # c.execute('''CREATE TABLE chiuse
-        #             (nome text, orario text, url text)
-        # ''')
-
-        c.execute('''CREATE TABLE assenti
-                (nome text)
-        ''')
-
-        # Insert a row of data
-        # c.execute("INSERT INTO open VALUES (,'BUY','RHAT',100,35.14)")
-
-        # Save (commit) the changes
-        conn.commit()
-
-        # We can also close the connection if we are done with it.
-        # Just be sure any changes have been committed or they will be lost.
-        conn.close()
+        #     cur.execute("insert into contacts (name, phone, email) values (?, ?, ?)",
+        #     (name, phone, email))
