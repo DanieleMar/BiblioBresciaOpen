@@ -109,7 +109,7 @@ def run():
                 biblio_aperte_dict['biblio'].append({'nome': i, 'orario': orario.strip().split("\n"), "url": Biblioteche_citta[i].split("/timetable/").pop(0)}) # core element: inserisce nel dizionario il nome, l'orario e l'url. strip rimuove gi spazi bianchi. split("\n") separa in due campi separati gli orari doppi. 
                     # pop(0) elimina parte inutile in url
                     # split(/"timetable/") serve a rimandare alla pagina principale sul sito opac di ogni biblioteca (invece che alla tabella orari)
-                orarioFormatted = orario.strip().split
+                orarioFormatted = orario.strip()
                 url = Biblioteche_citta[i].split("/timetable/").pop(0)
                 connectionDB.updateDB('aperte',i, url, orarioFormatted)
           
@@ -150,5 +150,3 @@ def run():
 
 
 run()
-
-connectionDB.updateDB()
