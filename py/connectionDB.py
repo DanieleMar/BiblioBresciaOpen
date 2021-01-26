@@ -2,7 +2,8 @@ import sqlite3
 import os
 
 
-def updateDB(whichTable, nome, orario, url=''):
+
+def updateDB(whichTable, nome, url='', orario=''):
     try:
         sqliteConnection = sqlite3.connect('./manageDB/dbFiles/orari.db')
         cursor = sqliteConnection.cursor()
@@ -13,7 +14,7 @@ def updateDB(whichTable, nome, orario, url=''):
                                 VALUES (?, ?);"""
                 data_tuple = ( nome, url)
 
-        else:  # aperte
+        elif whichTable == 'aperte':# aperte
                 sqlite_insert_with_param = """
                                 INSERT INTO aperte
                                 (nome, url, orario) 
@@ -24,7 +25,7 @@ def updateDB(whichTable, nome, orario, url=''):
         
         cursor.execute(sqlite_insert_with_param, data_tuple)
         sqliteConnection.commit()
-        print("Python Variables inserted successfully into SqliteDb_developers table")
+        print("Python Variables inserted successfully into table")
 
         cursor.close()
 
