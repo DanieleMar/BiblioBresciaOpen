@@ -6,6 +6,7 @@ import json
 from datetime import datetime
 import os
 import DBhandling
+import sqlite3
 
 fileDir = os.path.dirname(os.path.abspath(__file__))
 parentDir = os.path.dirname(fileDir)
@@ -37,6 +38,9 @@ Biblioteche_citta = {
 biblio_senza_orario=[]
 
 def run():
+    DBconnection = sqlite3.connect('./manageDB/dbFiles/orari.db')
+    print("Connected to SQLite")
+
     def ottieni_orario(url):
         try:
             html = urlopen(url) # apre url
@@ -81,7 +85,7 @@ def run():
 
     biblio_aperte_dict = {}
     biblio_chiuse_dict = {}
-    DBhandling.emptyTables() #empty tables to avoid redundant data
+    DBhandling.emptyTables(DBconnection) #empty tables to avoid redundant data
     # crea dizionario con orari
     for i in Biblioteche_citta:
 
@@ -96,7 +100,7 @@ def run():
                     # pop elimina lo spazio bianco dalla lista
 
                 url= Biblioteche_citta[i].split("/timetable/").pop(0)
-                DBhandling.updateDB('chiuse',i, url) ## add to db single biblio-- working on
+                DBhandling.updateDB(DBconnection,'chiuse',i, url) ## add to db single biblio-- working on
                 
             
         
@@ -111,7 +115,7 @@ def run():
                     # split(/"timetable/") serve a rimandare alla pagina principale sul sito opac di ogni biblioteca (invece che alla tabella orari)
                 orarioFormatted = orario.strip()
                 url = Biblioteche_citta[i].split("/timetable/").pop(0)
-                DBhandling.updateDB('aperte',i, url, orarioFormatted)
+                DBhandling.updateDB(DBconnection,'aperte',i, url, orarioFormatted)
           
         except TypeError as e:
             print (e)
@@ -146,6 +150,8 @@ def run():
 
     writeOnJson()
 
-
+    if (DBconnection):
+            DBconnection.close()
+            print("The SQLite connection is closed")
 
 run()
