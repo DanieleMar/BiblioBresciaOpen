@@ -3,7 +3,7 @@ import json
 from flask_bootstrap import Bootstrap
 import datetime
 import locale
-
+import sqlite3 as sql
 
 
 
@@ -49,6 +49,25 @@ def load_page():
 # @app.route("/")
 # def load_page():
 #   return render_template('sospeso.html') 
+
+
+@app.route('/list')
+def list():
+  try:
+    con = sql.connect("manageDB\dbFiles\orari.db")
+    con.row_factory = sql.Row
+  
+    cur = con.cursor()
+    cur.execute("select * from aperte")
+  
+    rows = cur.fetchall(); 
+    return render_template("list.html",rows = rows)
+  except sql.Error as error:
+    print("Fail: ", error)
+  
+  
+
+
 
 
 if __name__ == '__main__':
