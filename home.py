@@ -31,17 +31,7 @@ def inject_today_date():
 openjson = json.load(open("dati/open.json", "r")) 
 chiusejson = json.load(open("dati/chiuse.json", "r"))
 
-# FUNZIONA. MA CAMBIO PER FARE PAGINA TEMPORANEA
-@app.route("/")
 
-def load_page():
-  try:
-      return render_template('bbo-home.html', listaAperte=openjson["biblio"], listaChiuse=chiusejson["chiuse"]) 
-  except KeyError as e:
-    print("Errore: "+ str(e))
-    if str(e)=="'biblio'": #se nessuna biblio è aperta, lascia la tabella vuota
-      return render_template('bbo-home.html', listaAperte="", listaChiuse=chiusejson["chiuse"])
-    return (str(e))
     
       
 
@@ -51,7 +41,7 @@ def load_page():
 #   return render_template('sospeso.html') 
 
 
-@app.route('/list')
+@app.route('/')
 def list():
   try:
     con = sql.connect("manageDB\dbFiles\orari.db")
@@ -59,9 +49,12 @@ def list():
   
     cur = con.cursor()
     cur.execute("select * from aperte")
-  
-    rows = cur.fetchall(); 
-    return render_template("list.html",rows = rows)
+    open = cur.fetchall(); 
+
+    cur.execute("select * from chiuse")
+    close = cur.fetchall()
+
+    return render_template("bbo-home.html", aperte = open, chiuse = close )
   except sql.Error as error:
     print("Fail: ", error)
   
