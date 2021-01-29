@@ -718,3 +718,5 @@ Lib/site-packages/setuptools-49.2.1.dist-info/REQUESTED
 Lib/site-packages/setuptools-49.2.1.dist-info/top_level.txt
 Lib/site-packages/setuptools-49.2.1.dist-info/WHEEL
 Lib/site-packages/setuptools-49.2.1.dist-info/zip-safe
+TODO.md
+manageDB/dbFiles/orari.db
