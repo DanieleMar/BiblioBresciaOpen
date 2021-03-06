@@ -8,4 +8,10 @@ Tecnologie utilizzate:
 - JSON
 - Nginx
 
-Vecchio Url: https://bibliobresciaopen.it
+Pagina originale su https://bibliobresciaopen.it ora disabilitata
+
+Nuova pagina statica: https://danielemar.github.io/BiblioBresciaOpen/ 
+(Gli orari rimangono fissi, non si aggiornano)
+E' solo esemplificativa, ho rimosso l'aggiornamento dei dati
+
+Rimane valido e funzionante il codice sorgente presente qui su Github
