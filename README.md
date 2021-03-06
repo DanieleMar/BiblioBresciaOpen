@@ -8,4 +8,4 @@ Tecnologie utilizzate:
 - JSON
 - Nginx
 
-https://bibliobresciaopen.it
+Vecchio Url: https://bibliobresciaopen.it
